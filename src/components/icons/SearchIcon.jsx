@@ -1,8 +1,8 @@
 export default function SearchIcon() {
   return (
     <svg
-      width="21"
-      height="21"
+      width="15"
+      height="15"
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"

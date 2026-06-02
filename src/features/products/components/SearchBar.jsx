@@ -23,7 +23,7 @@ export default function SearchBar({ value, onChange }) {
   return (
     <section className="flex justify-end">
       <div
-        className={`flex items-center gap-1 rounded-2xl bg-white p-1 shadow-sm transition-all duration-300 ${
+        className={`flex items-center gap-1 rounded-2xl bg-white p-1 shadow-sm transition-all duration-150 ${
           isOpen ? "w-full sm:w-96" : "w-12"
         }`}
       >
