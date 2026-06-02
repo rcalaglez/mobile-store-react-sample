@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-results-button,
+.search-input::-webkit-search-results-decoration {
+  display: none;
+}
+
+.search-input {
+  -webkit-appearance: none;
+  appearance: none;
+}
