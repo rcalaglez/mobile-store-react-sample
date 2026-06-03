@@ -3,6 +3,7 @@ import OptionSelector, {
   StorageOption,
   ColorOption,
 } from "@/components/ui/OptionSelector";
+import useAddToCart from "@/features/cart/hooks/useAddToCart";
 
 export default function ProductActions({ product }) {
   const storages = product.options.storages ?? [];
@@ -10,11 +11,18 @@ export default function ProductActions({ product }) {
 
   const [storageCode, setStorageCode] = useState(storages[0]?.code ?? null);
   const [colorCode, setColorCode] = useState(colors[0]?.code ?? null);
+  const { mutate, isPending } = useAddToCart();
 
   const canAdd = storageCode != null && colorCode != null;
 
-  function handleAdd() {
+function handleAdd() {
     if (!canAdd) return;
+
+    mutate({
+      id: product.id,
+      colorCode,
+      storageCode,
+    });
   }
 
   return (
@@ -45,7 +53,7 @@ export default function ProductActions({ product }) {
         disabled={!canAdd}
         className="w-full rounded-md bg-orange-500 py-3 text-sm font-medium text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {"Añadir al carrito"}
+        {isPending ? "Añadiendo…" : "Añadir al carrito"}
       </button>
     </section>
   );

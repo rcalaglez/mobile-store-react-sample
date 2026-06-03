@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 import Breadcrumbs from "./Breadcrumbs";
 import CartIcon from "@/components/icons/CartIcon";
+import useCart from "@/features/cart/hooks/useCart";
+
 export default function Header() {
-  const count = 1;
+  const { count } = useCart();
 
   return (
     <header className="border-b border-neutral-100 bg-white">
