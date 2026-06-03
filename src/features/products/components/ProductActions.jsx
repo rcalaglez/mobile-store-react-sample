@@ -11,12 +11,12 @@ export default function ProductActions({ product }) {
 
   const [storageCode, setStorageCode] = useState(storages[0]?.code ?? null);
   const [colorCode, setColorCode] = useState(colors[0]?.code ?? null);
-  const { mutate, isPending } = useAddToCart();
+  const { mutate, isPending, isError, isSuccess, reset } = useAddToCart();
 
   const canAdd = storageCode != null && colorCode != null;
 
-function handleAdd() {
-    if (!canAdd) return;
+  function handleAdd() {
+    if (!canAdd || isPending) return;
 
     mutate({
       id: product.id,
@@ -50,11 +50,32 @@ function handleAdd() {
       <button
         type="button"
         onClick={handleAdd}
-        disabled={!canAdd}
+        disabled={!canAdd || isPending}
         className="w-full rounded-md bg-orange-500 py-3 text-sm font-medium text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {isPending ? "Añadiendo…" : "Añadir al carrito"}
       </button>
+
+      {isSuccess && (
+        <p className="text-center text-sm text-green-600">
+          Producto añadido al carrito
+        </p>
+      )}
+
+      {isError && (
+        <div className="text-center">
+          <p className="text-sm text-red-600">
+            Error al añadir al carrito. Inténtalo de nuevo.
+          </p>
+          <button
+            type="button"
+            onClick={reset}
+            className="mt-1 text-sm text-orange-600 underline hover:text-orange-700"
+          >
+            Cerrar
+          </button>
+        </div>
+      )}
     </section>
   );
 }

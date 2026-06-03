@@ -10,5 +10,8 @@ export default function useAddToCart() {
     onSuccess: (data) => {
       setCount(data.count);
     },
+    onError: (error) => {
+      console.error("Add to cart failed:", error);
+    },
   });
 }
