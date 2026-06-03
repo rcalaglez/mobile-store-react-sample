@@ -20,6 +20,15 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+  proxy: {
+    "/api": {
+      target: "https://itx-frontend-test.onrender.com",
+      changeOrigin: true,
+      secure: true,
+    },
+  },
+},
   test: {
     environment: "jsdom",
     setupFiles: ["./src/test/setup.js"],
