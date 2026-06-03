@@ -8,7 +8,6 @@ export default function useAddToCart() {
   return useMutation({
     mutationFn: addToCart,
     onSuccess: (data) => {
-      console.log("Added to cart", data);
       setCount(data.count);
     },
   });

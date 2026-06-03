@@ -12,8 +12,6 @@ export default function CartProvider({ children }) {
     localStorage.setItem(STORAGE_KEY, String(count));
   }, [count]);
 
-  console.log("Cart count:", count);
-
   return (
     <CartContext.Provider value={{ count, setCount }}>
       {children}
