@@ -32,8 +32,8 @@ export default function ProductDetailPage() {
           </h1>
 
           <div className="mt-4 space-y-6">
-            <ProductDescription product={product} />
             <ProductActions product={product} />
+            <ProductDescription product={product} />
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import OptionSelector, {
   ColorOption,
 } from "@/components/ui/OptionSelector";
 import useAddToCart from "@/features/cart/hooks/useAddToCart";
+import Toast from "@/components/ui/Toast";
 
 export default function ProductActions({ product }) {
   const storages = product.options.storages ?? [];
@@ -26,7 +27,7 @@ export default function ProductActions({ product }) {
   }
 
   return (
-    <section className="mt-8 space-y-6">
+    <section className="space-y-6">
       <OptionSelector
         label="Almacenamiento"
         options={storages}
@@ -56,12 +57,6 @@ export default function ProductActions({ product }) {
         {isPending ? "Añadiendo…" : "Añadir al carrito"}
       </button>
 
-      {isSuccess && (
-        <p className="text-center text-sm text-green-600">
-          Producto añadido al carrito
-        </p>
-      )}
-
       {isError && (
         <div className="text-center">
           <p className="text-sm text-red-600">
@@ -75,6 +70,13 @@ export default function ProductActions({ product }) {
             Cerrar
           </button>
         </div>
+      )}
+
+      {isSuccess && (
+        <Toast
+          message="Producto añadido al carrito"
+          onClose={reset}
+        />
       )}
     </section>
   );

@@ -8,6 +8,7 @@ import ProductGrid from "@/features/products/components/ProductGrid";
 import Spinner from "@/components/feedback/Spinner";
 import ErrorState from "@/components/feedback/ErrorState";
 import PageShell from "@/components/ui/PageShell";
+import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
 
 const PRODUCTS_PER_PAGE = 12;
 const MIN_LOADING_TIME = 450;
@@ -74,6 +75,8 @@ export default function ProductListPage() {
           {isLoadingMore && <LoadMoreSpinner />}
         </div>
       )}
+
+      <ScrollToTopButton />
     </PageShell>
   );
 }
