@@ -1,7 +1,7 @@
-const BASE_URL = "https://itx-frontend-test.onrender.com";
+
 
 async function request(path, options = {}) {
-  const response = await fetch(`${BASE_URL}${path}`, {
+  const response = await fetch(path, {
     headers: {
       "Content-Type": "application/json",
       ...options.headers,

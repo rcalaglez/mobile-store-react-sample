@@ -16,7 +16,7 @@ describe("apiClient", () => {
     await apiClient.request("/api/product");
 
     expect(fetch).toHaveBeenCalledWith(
-      "https://itx-frontend-test.onrender.com/api/product",
+      "/api/product",
       expect.objectContaining({
         headers: expect.objectContaining({
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ describe("apiClient", () => {
     });
 
     expect(fetch).toHaveBeenCalledWith(
-      "https://itx-frontend-test.onrender.com/api/cart",
+      "/api/cart",
       expect.objectContaining({
         method: "POST",
         body: JSON.stringify({ productId: "1" }),
