@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CartProvider from "@/features/cart/context/CartProvider";
 import ProductDetailPage from "./ProductDetailPage";
 import * as useProductModule from "@/features/products/hooks/useProduct";
 
@@ -39,11 +40,13 @@ function createWrapper() {
   return function Wrapper({ children }) {
     return (
       <QueryClientProvider client={queryClient}>
-        <MemoryRouter initialEntries={["/product/1"]}>
-          <Routes>
-            <Route path="/product/:id" element={children} />
-          </Routes>
-        </MemoryRouter>
+        <CartProvider>
+          <MemoryRouter initialEntries={["/product/1"]}>
+            <Routes>
+              <Route path="/product/:id" element={children} />
+            </Routes>
+          </MemoryRouter>
+        </CartProvider>
       </QueryClientProvider>
     );
   };
