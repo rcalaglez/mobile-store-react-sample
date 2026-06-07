@@ -52,12 +52,14 @@ src/
 ├── api/                → cliente HTTP y utilidades de filtrado
 ├── app/                → providers (QueryClient, Router) y definición de rutas
 ├── components/         → componentes reutilizables
-│   ├── feedback/       → Spinner, ErrorState
+│   ├── feedback/       → Spinner, ErrorState, LoadMoreSpinner
 │   ├── icons/          → iconos SVG (cart, search)
 │   ├── layout/         → Header, Breadcrumbs
-│   └── ui/             → PageShell
+│   └── ui/             → PageShell, Collapsible, OptionSelector, Toast, ScrollToTopButton
 ├── features/           → módulos por dominio
 │   └── products/       → api, components, hooks, pages, utils
+├── features/
+│   └── cart/           → api, context, hooks
 ├── hooks/              → hooks compartidos (useDebounce, useInfiniteScroll)
 ├── lib/                → utilidades (priceUtils, queryClient, queryKeys)
 ├── styles/             → estilos globales (Tailwind)
@@ -84,3 +86,21 @@ src/
 ├── features/products/pages/ProductListPage.test.jsx
 └── components/layout/Header.test.jsx
 ```
+
+## Mejoras de experiencia de usuario
+
+La aplicación incluye las siguientes mejoras de UX/UI:
+
+- **ErrorBoundary** — Captura errores de render y muestra UI de recuperación con botón de reintentar
+- **Sticky Header** — El header se mantiene fijo al hacer scroll, ocultando los breadcrumbs para ganar espacio
+- **Especificaciones expansibles** — La tabla de specs se pliega/despliega con animación fluida
+- **Toasts** — Notificaciones no intrusivas para feedback de acciones (añadir al carrito)
+- **Spinners de feedback** — Estados de carga en botones y carga incremental de productos
+- **ScrollToTop** — Botón flotante para volver arriba en el listado de productos
+- **Debounce** — La búsqueda aplica un retardo de 300ms para evitar filtrar en cada tecla
+- **Infinite Scroll** — Los productos se cargan por bloques de 12 al hacer scroll
+- **Acciones accesibles** — Los selectores de opciones y el botón de añadir al carrito se muestran antes que la tabla de especificaciones para facilitar el acceso
+
+### React Compiler
+
+El proyecto utiliza `babel-plugin-react-compiler`, que aplica memoizaciones automáticas en tiempo de compilación. Esto elimina la necesidad de `useMemo`, `useCallback` y `React.memo` manuales en la mayoría de casos, ya que el compilador detecta y optimiza los re-renders por sí solo.
