@@ -54,4 +54,29 @@ describe("filterProducts", () => {
     const result = filterProducts(products, "");
     expect(result).toBe(products);
   });
+
+  it("filters by brand + model combined", () => {
+    const extended = [
+      ...products,
+      { id: "5", brand: "Acer", model: "Iconia Tab A500" },
+    ];
+    const result = filterProducts(extended, "acer iconia");
+    expect(result).toHaveLength(1);
+    expect(result[0].brand).toBe("Acer");
+  });
+
+  it("filters by model + brand reversed order", () => {
+    const extended = [
+      ...products,
+      { id: "5", brand: "Acer", model: "Iconia Tab A500" },
+    ];
+    const result = filterProducts(extended, "iconia acer");
+    expect(result).toHaveLength(1);
+    expect(result[0].brand).toBe("Acer");
+  });
+
+  it("each word must match at least one field", () => {
+    const result = filterProducts(products, "samsung iphone");
+    expect(result).toHaveLength(0);
+  });
 });

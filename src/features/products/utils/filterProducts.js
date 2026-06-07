@@ -1,12 +1,10 @@
 export function filterProducts(products = [], term = "") {
-  const query = term.trim().toLowerCase();
-
-  if (!query) return products;
+  const words = term.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!words.length) return products;
 
   return products.filter((product) => {
-    return (
-      product.brand?.toLowerCase().includes(query) ||
-      product.model?.toLowerCase().includes(query)
-    );
+    const brand = product.brand?.toLowerCase() ?? "";
+    const model = product.model?.toLowerCase() ?? "";
+    return words.every((word) => brand.includes(word) || model.includes(word));
   });
 }
